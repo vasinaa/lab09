@@ -11,7 +11,7 @@ jobs:
       
       - name: Build
         run: |
-          mkdir _build && cd_build
+          mkdir _build && cd _build
           cmake .. -DCPACK_GENERATOR="TGZ"
           cmake --build . --target package
           
