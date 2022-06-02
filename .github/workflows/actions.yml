@@ -1,4 +1,4 @@
-name: solver_CPack
+name: solver_CPack_0
 
 on:
   workflow_dispatch:
