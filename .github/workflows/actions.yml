@@ -1,0 +1,30 @@
+name: solver_CPack
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Build
+        run: |
+          mkdir _build && cd_build
+          cmake .. -DCPACK_GENERATOR="TGZ"
+          cmake --build . --target package
+          
+          cpack -G "DEB"
+          cpack -G "RPM"
+          
+          mkdir ../artifacts
+          mv *.tar.gz ../artifacts/
+          mv *.deb ../artifacts/
+          mv *.rpm ../artifacts
+          
+      - name: Public
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          path: artifacts
